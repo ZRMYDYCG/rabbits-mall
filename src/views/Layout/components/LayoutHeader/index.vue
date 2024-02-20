@@ -2,6 +2,7 @@
 /***
  * 组件依赖
  * **/
+
 import { ref } from 'vue'
 import { getCategoryAPI } from '@/api/index.js'
 import { onMounted } from 'vue'
@@ -20,6 +21,7 @@ const getCategory = async () => {
 /***
  * 声明周期钩子
  * **/
+
 onMounted(() => {
   getCategory()
 })
@@ -32,6 +34,7 @@ onMounted(() => {
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
       <ul class="app-header-nav">
+        <!-- 一级导航渲染 -->
         <li class="home" v-for="item in categoryList" :key="item.id">
           <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
@@ -73,24 +76,24 @@ onMounted(() => {
     padding-left: 40px;
     position: relative;
     z-index: 998;
-  
+
     li {
       margin-right: 40px;
       width: 38px;
       text-align: center;
-  
+
       a {
         font-size: 16px;
         line-height: 32px;
         height: 32px;
         display: inline-block;
-  
+
         &:hover {
           color: $xtxColor;
           border-bottom: 1px solid $xtxColor;
         }
       }
-  
+
       .active {
         color: $xtxColor;
         border-bottom: 1px solid $xtxColor;
