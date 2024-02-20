@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <RouterView />
+<div>11home11</div>
 </template>
 
 <style scoped>
