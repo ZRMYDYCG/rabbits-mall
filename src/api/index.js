@@ -37,7 +37,6 @@ export const getCategoryAPI = () => {
  * @data 无
  * @return Object
  */
-
 export const getBannerAPI = () => {
   return httpInstance({
     url: '/home/banner'

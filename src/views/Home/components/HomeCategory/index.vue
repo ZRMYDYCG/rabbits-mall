@@ -160,7 +160,7 @@ const categoryStore = useCategoryStore()
         }
       }
 
-      // 关键样式  hover状态下的layer盒子变成block
+      // IMPORTANT: 关键样式  hover状态下的layer盒子变成block
       &:hover {
         .layer {
           display: block;
