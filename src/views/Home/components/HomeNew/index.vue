@@ -8,34 +8,52 @@
  * 组件依赖
  * **/
 import NewPanel from './components/NewPanel/index.vue'
-import { getFindNewAPI } from '@/api/index.js'
+import { getFindNewAPI, getPopularAPI } from '@/api/index.js'
 import { onMounted, ref } from 'vue'
 
 /***
  * 脚本主体逻辑
  * **/
+// TODO: 人气推荐及新鲜好物数据获取及模板渲染
 const newList = ref([])
 const getFindNew = async () => {
   const res = await getFindNewAPI()
   newList.value = res.result
 }
-
+const popularList = ref([])
+const getPopular = async () => {
+  const res = await getPopularAPI()
+  popularList.value = res.result
+}
 
 /***
  * 声明周期钩子
  * **/
 onMounted(() => {
   getFindNew()
+  getPopular()
 })
 </script>
 
 <template>
   <NewPanel title="新鲜好物" subTitle="新鲜出炉 品质靠谱">
-      <!-- 插槽主体内容模版 -->
+      <!-- 插槽主体内容 -->
       <ul class="goods-list">
         <li v-for="item in newList" :key="item.id">
           <RouterLink to="/">
-            <img :src="item.picture" alt="" />
+            <img v-img-lazy="item.picture" alt="" />
+            <p class="name">{{ item.name }}</p>
+            <p class="price">&yen;{{ item.price }}</p>
+          </RouterLink>
+        </li>
+      </ul>
+  </NewPanel>
+  <NewPanel title="人气推荐" subTitle="人气爆棚 不容错过">
+      <!-- 插槽主体内容 -->
+      <ul class="goods-list">
+        <li v-for="item in popularList" :key="item.id">
+          <RouterLink to="/">
+            <img v-img-lazy="item.picture" alt="" />
             <p class="name">{{ item.name }}</p>
             <p class="price">&yen;{{ item.price }}</p>
           </RouterLink>

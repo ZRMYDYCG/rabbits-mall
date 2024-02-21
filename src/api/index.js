@@ -43,7 +43,6 @@ export const getBannerAPI = () => {
   })
 }
 
-
 /**
  * @desc 获取新鲜好物数据
  * @param 无
@@ -51,6 +50,18 @@ export const getBannerAPI = () => {
  * @return Object
  */
 export const getFindNewAPI = () => {
+  return httpInstance({
+    url:'/home/new'
+  })
+}
+
+/**
+ * @desc 获取人气推荐数据
+ * @param 无
+ * @data 无
+ * @return Object
+ */
+export const getPopularAPI = () => {
   return httpInstance({
     url:'/home/new'
   })
