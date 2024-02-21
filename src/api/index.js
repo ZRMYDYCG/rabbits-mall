@@ -66,3 +66,15 @@ export const getPopularAPI = () => {
     url:'/home/new'
   })
 }
+
+/**
+ * @desc 获取所有商品模块
+ * @param 无
+ * @data 无
+ * @reurn Object
+ */
+export const getGoodsAPI = () => {
+  return httpInstance({
+    url: '/home/goods'
+  })
+}

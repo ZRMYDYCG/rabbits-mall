@@ -7,7 +7,7 @@
 /***
  * 组件依赖
  * **/
-import NewPanel from './components/NewPanel/index.vue'
+import HomePanel from '@/components/HomePanel/index.vue'
 import { getFindNewAPI, getPopularAPI } from '@/api/index.js'
 import { onMounted, ref } from 'vue'
 
@@ -36,7 +36,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <NewPanel title="新鲜好物" subTitle="新鲜出炉 品质靠谱">
+  <HomePanel title="新鲜好物" subTitle="新鲜出炉 品质靠谱">
       <!-- 插槽主体内容 -->
       <ul class="goods-list">
         <li v-for="item in newList" :key="item.id">
@@ -47,8 +47,8 @@ onMounted(() => {
           </RouterLink>
         </li>
       </ul>
-  </NewPanel>
-  <NewPanel title="人气推荐" subTitle="人气爆棚 不容错过">
+  </HomePanel>
+  <HomePanel title="人气推荐" subTitle="人气爆棚 不容错过">
       <!-- 插槽主体内容 -->
       <ul class="goods-list">
         <li v-for="item in popularList" :key="item.id">
@@ -59,7 +59,7 @@ onMounted(() => {
           </RouterLink>
         </li>
       </ul>
-  </NewPanel>
+  </HomePanel>
 </template>
 
 
