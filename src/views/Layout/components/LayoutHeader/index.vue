@@ -1,8 +1,12 @@
 <script setup>
+/**
+ * 责任人：Array
+ * ['曾日闽']
+ * **/
+
 /***
  * 组件依赖
  * **/
-
 import { ref } from 'vue'
 import { getCategoryAPI } from '@/api/index.js'
 import { onMounted } from 'vue'
@@ -10,7 +14,6 @@ import { onMounted } from 'vue'
 /***
  * 脚本主体逻辑
  * **/
-
 // TODO: 获取到头部导航栏的一级分类并进行动态渲染
 const categoryList = ref([])
 const getCategory = async () => {
@@ -19,9 +22,8 @@ const getCategory = async () => {
 }
 
 /***
- * 声明周期钩子
+ * 生命周期钩子
  * **/
-
 onMounted(() => {
   getCategory()
 })
