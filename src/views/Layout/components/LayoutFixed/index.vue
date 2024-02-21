@@ -8,51 +8,32 @@
  * 组件依赖
  * **/
 import { useScroll } from '@vueuse/core'
-const { y } = useScroll(window)
+import { useCategoryStore } from '@/stores/category/index.js'
+
 /***
  * 脚本主体逻辑
  * **/
+// TODO: 监视 y 轴滚动距离，实现吸顶导航显示隐藏
+const { y } = useScroll(window)
+
+// TODO: pinia 优化
+const categoryStore = useCategoryStore()
 
 /***
  * 声明周期钩子
  * **/
+
 </script>
 
 <template>
+ <!-- IMPORTANT: 动态 class -->
   <div class="app-header-sticky" :class="{ show: y > 78 }">
     <div class="container">
       <RouterLink class="logo" to="/" />
       <!-- 导航区域 -->
       <ul class="app-header-nav ">
-        <li class="home">
-          <RouterLink to="/">首页</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">居家</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">美食</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">服饰</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">母婴</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">个护</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">严选</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">数码</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">运动</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">杂项</RouterLink>
+        <li class="home" v-for="item in categoryStore.categoryList" :key="item.id">
+          <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
       </ul>
 
@@ -75,7 +56,7 @@ const { y } = useScroll(window)
   z-index: 999;
   background-color: #fff;
   border-bottom: 1px solid #e4e4e4;
-  // TODO: 实现吸顶效果的关键样式
+  // IMPORTANT: 实现吸顶效果的关键样式
   // 状态一：往上平移自身高度 + 完全透明
   transform: translateY(-100%);
   opacity: 0;

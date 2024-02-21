@@ -7,26 +7,18 @@
 /***
  * 组件依赖
  * **/
-import { ref } from 'vue'
-import { getCategoryAPI } from '@/api/index.js'
-import { onMounted } from 'vue'
+import { useCategoryStore } from '@/stores/category/index.js'
 
 /***
  * 脚本主体逻辑
  * **/
-// TODO: 获取到头部导航栏的一级分类并进行动态渲染
-const categoryList = ref([])
-const getCategory = async () => {
- const res = await getCategoryAPI()
- categoryList.value = res.result
-}
+// TODO: pinia 优化
+const categoryStore = useCategoryStore()
 
 /***
  * 生命周期钩子
  * **/
-onMounted(() => {
-  getCategory()
-})
+
 </script>
 
 <template>
@@ -37,7 +29,7 @@ onMounted(() => {
       </h1>
       <ul class="app-header-nav">
         <!-- 一级导航渲染 -->
-        <li class="home" v-for="item in categoryList" :key="item.id">
+        <li class="home" v-for="item in categoryStore.categoryList" :key="item.id">
           <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
       </ul>
