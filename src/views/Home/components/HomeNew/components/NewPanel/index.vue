@@ -1,4 +1,4 @@
-<script>
+<script setup>
 /**
  * 责任人：Array
  * ['曾日闽']

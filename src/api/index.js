@@ -42,3 +42,16 @@ export const getBannerAPI = () => {
     url: '/home/banner'
   })
 }
+
+
+/**
+ * @desc 获取新鲜好物数据
+ * @param 无
+ * @data 无
+ * @return Object
+ */
+export const getFindNewAPI = () => {
+  return httpInstance({
+    url:'/home/new'
+  })
+}
