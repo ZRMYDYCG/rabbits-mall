@@ -73,3 +73,7 @@ npm run lint
 2. 抽象可变的部分
     - 主标题和副标题是纯文本，可以抽象成 prop 传入
     - 主体内容是复杂的模板，可以抽象成插槽传入
+
+### 接口文档
+
+[接口文档](https://www.apifox.cn/apidoc/shared-c05cb8d7-e591-4d9c-aff8-11065a0ec1de/api-67132167)

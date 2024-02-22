@@ -16,7 +16,7 @@ httpInstance.interceptors.response.use(res => res.data, e => {
 return Promise.reject(e)
 })
 
-// TODO: Layout 模块
+// TODO: 首页页面
 /**
  * @desc 获取全部分类(包含推荐商品) 注意: 可以认为获取的是一级分类列表
  * @param 无
@@ -30,16 +30,19 @@ export const getCategoryAPI = () => {
   })
 }
 
-// TODO: Home 模块
 /**
  * @desc 获取轮播图数据
- * @param 无
+ * @param { @distributionSite } @distributionSite string 可选  广告区域展示位置（投放位置 投放位置，1为首页，2为分类商品页） 默认是1
  * @data 无
  * @return Object
  */
-export const getBannerAPI = () => {
+export const getBannerAPI = (params = {}) => {
+  const { distributionSite = '1' } = params
   return httpInstance({
-    url: '/home/banner'
+    url: '/home/banner',
+    params: {
+      distributionSite
+    }
   })
 }
 
@@ -63,7 +66,7 @@ export const getFindNewAPI = () => {
  */
 export const getPopularAPI = () => {
   return httpInstance({
-    url:'/home/new'
+    url:'/home/hot'
   })
 }
 
@@ -76,5 +79,21 @@ export const getPopularAPI = () => {
 export const getGoodsAPI = () => {
   return httpInstance({
     url: '/home/goods'
+  })
+}
+
+// TODO: 分类页面
+/**
+ * @desc 获取二级分类列表
+ * @param { @id } @id 一级分类id 必需
+ * @data 无
+ * @reurn Object
+ */
+export const getSubCategoryAPI = (id) => {
+  return httpInstance({
+    url: '/category',
+    params: {
+      id
+    }
   })
 }
