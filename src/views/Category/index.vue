@@ -7,46 +7,18 @@
 /***
  * 组件依赖
  * **/
-import { onMounted, ref } from 'vue'
-import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import GoodsItem from '@/components/GoodsItem/index.vue'
-import { getSubCategoryAPI, getBannerAPI } from '@/api/index.js'
-const route = useRoute()
-
+import { useBanner } from './composables/useBanner.js'
+import { useCategory } from './composables/useCategory.js'
 /***
  * 脚本主体逻辑
  * **/
-// TODO: 一级分类面包屑渲染
-const subCategory = ref({})
-const getSubCategory = async (id = route.params.id) => {
-  const res = await getSubCategoryAPI(id)
-  subCategory.value = res.result
-}
-
-// TODO: 获取 Banner 数据，进行动态渲染
-const bannerList = ref([])
-const getBanner = async () => {
-  const { result } = await getBannerAPI({
-    distributionSite: '2'
-  })
-  bannerList.value = result
-}
-
-// TODO: 路由参数变化的时候，可以把分类数据接口重新发送
-onBeforeRouteUpdate((to) => {
-  /**
-   * @params { @to } @to 目标路由对象
-   * ***/
-  getSubCategory(to.params.id)
-})
+const { bannerList } = useBanner()
+const { subCategory } = useCategory()
 
 /***
  * 声明周期钩子
  * **/
-onMounted(() => {
-  getSubCategory()
-  getBanner()
-})
 
 </script>
 
