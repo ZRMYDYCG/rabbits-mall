@@ -9,6 +9,7 @@
  * **/
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import GoodsItem from '@/components/GoodsItem/index.vue'
 import { getSubCategoryAPI, getBannerAPI } from '@/api/index.js'
 const route = useRoute()
 
@@ -19,6 +20,7 @@ const route = useRoute()
 const subCategory = ref({})
 const getSubCategory = async () => {
   const res = await getSubCategoryAPI(route.params.id)
+  console.log(res)
   subCategory.value = res.result
 }
 // TODO: 获取 Banner 数据，进行动态渲染
@@ -57,6 +59,26 @@ onMounted(() => {
             <img :src="item.imgUrl" alt="">
           </el-carousel-item>
         </el-carousel>
+      </div>
+      <!-- 分类列表 -->
+      <div class="sub-list">
+        <h3>全部分类</h3>
+        <ul>
+          <li v-for="i in subCategory.children" :key="i.id">
+            <RouterLink to="/">
+              <img :src="i.picture" />
+              <p>{{ i.name }}</p>
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
+      <div class="ref-goods" v-for="item in subCategory.children" :key="item.id">
+        <div class="head">
+          <h3>- {{ item.name }}-</h3>
+        </div>
+        <div class="body">
+          <GoodsItem v-for="good in item.goods" :good="good" :key="good.id" />
+        </div>
       </div>
     </div>
   </div>
