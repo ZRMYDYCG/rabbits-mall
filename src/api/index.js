@@ -124,10 +124,27 @@ export const getCategoryFilterAPI = (id) => {
    }
  * @return {*}
  */
-   export const getSubCategoryGoodsAPI = (data) => {
-    return httpInstance({
-      url:'/category/goods/temporary',
-      method:'POST',
-      data
-    })
-  }
+export const getSubCategoryGoodsAPI = (data) => {
+  return httpInstance({
+    url:'/category/goods/temporary',
+    method:'POST',
+    data
+  })
+}
+
+
+// TODO: 商品详情页面
+/**
+ * @description: 获取商品详情
+ * @params { @id } id: 商品项的 id
+ * @data 无
+ * @return {*}
+ */
+export const getDetailAPI = (id) => {
+  return httpInstance({
+    url: '/goods',
+    params: {
+      id
+    }
+  })
+}

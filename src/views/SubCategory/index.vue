@@ -1,10 +1,21 @@
 <script setup>
+/**
+ * 责任人：Array
+ * ['曾日闽']
+ * **/
+
+/***
+ * 组件依赖
+ * **/
 import { getCategoryFilterAPI, getSubCategoryGoodsAPI } from '@/api/index.js'
 import GoodsItem from '@/components/GoodsItem/index.vue'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 
+/***
+ * 脚本主体逻辑
+ * **/
 // TODO: 获取面包屑导航数据
 const categoryData = ref({})
 const getCategoryFilter = async () => {
@@ -43,6 +54,9 @@ const loadMore = async () => {
   }
 }
 
+/***
+ * 声明周期钩子
+ * **/
 onMounted(() => {
   getCategoryFilter()
   getSubCategoryGoods()
@@ -74,8 +88,6 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
-
 
 <style lang="scss" scoped>
 .bread-container {
