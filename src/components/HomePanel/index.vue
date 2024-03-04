@@ -7,7 +7,6 @@
 /***
  * 组件依赖
  * **/
-import { defineProps } from 'vue'
 defineProps({
     // 主标题
     title: {

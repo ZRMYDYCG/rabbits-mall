@@ -7,6 +7,7 @@
 /***
  * 组件依赖
  * **/
+import DetailHot from './components/DetailHot.vue'
 import { getDetailAPI } from '@/api/index.js'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
@@ -15,10 +16,16 @@ const route = useRoute()
 /***
  * 脚本主体逻辑
  * **/
+// TODO:商品基本信息渲染
 const goods = ref({})
 const getDetail = async () => {
   const res = await getDetailAPI(route.params.id)
   goods.value = res.result
+}
+
+// TODO:sku规格被操作时
+const skuChange = (sku) => {
+  console.log(sku)
 }
 
 /***
@@ -51,7 +58,7 @@ onMounted(() => {
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-
+              <ImageView :image-list="goods.mainPictures" />
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
@@ -100,7 +107,7 @@ onMounted(() => {
                 </dl>
               </div>
               <!-- sku组件 -->
-
+              <XtxSku :goods="goods" @change="skuChange"/>
               <!-- 数据组件 -->
 
               <!-- 按钮组件 -->
@@ -134,7 +141,10 @@ onMounted(() => {
             </div>
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
-
+              <!-- 24小时 -->
+              <DetailHot :hot-type="1" />
+              <!-- 周 -->
+              <DetailHot :hot-type="2" />
             </div>
           </div>
         </div>

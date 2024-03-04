@@ -1,11 +1,12 @@
 import axios from 'axios'
+import { ElMessage } from 'element-plus'
 
 const httpInstance = axios.create({
     baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
     timeout: 5000
 })
 
-// TODO: 配置拦截器
+// TODO:配置拦截器
 // axios请求拦截器
 httpInstance.interceptors.request.use(config => {
     return config
@@ -13,10 +14,15 @@ httpInstance.interceptors.request.use(config => {
 
 // axios响应式拦截器
 httpInstance.interceptors.response.use(res => res.data, e => {
-return Promise.reject(e)
+  // 统一错误提示
+  ElMessage({
+    type: 'warning',
+    message: e.response.data.message
+  })
+  return Promise.reject(e)
 })
 
-// TODO: 首页页面
+// TODO:首页页面接口
 /**
  * @desc 获取全部分类(包含推荐商品) 注意: 可以认为获取的是一级分类列表
  * @param 无
@@ -82,7 +88,7 @@ export const getGoodsAPI = () => {
   })
 }
 
-// TODO: 分类页面
+// TODO:分类页面接口
 /**
  * @desc 获取二级分类列表
  * @param { @id } @id 一级分类id 必需
@@ -133,7 +139,7 @@ export const getSubCategoryGoodsAPI = (data) => {
 }
 
 
-// TODO: 商品详情页面
+// TODO:商品详情页面接口
 /**
  * @description: 获取商品详情
  * @params { @id } id: 商品项的 id
@@ -145,6 +151,35 @@ export const getDetailAPI = (id) => {
     url: '/goods',
     params: {
       id
+    }
+  })
+}
+
+/**
+ * 获取热榜商品
+ * @param {Number} id - 商品id
+ * @param {Number} type - 1代表24小时热销榜 2代表周热销榜
+ * @param {Number} limit - 获取个数
+ */
+export const getHotGoodsAPI = ({ id, type, limit = 3 }) => {
+  return httpInstance({
+    url:'/goods/hot',
+    params:{
+      id,
+      type,
+      limit
+    }
+  })
+}
+
+// TODO:用户相关接口
+export const loginAPI = ({ account, password }) => {
+  return httpInstance({
+    url: '/login',
+    method: 'post',
+    data: {
+      account,
+      password
     }
   })
 }
