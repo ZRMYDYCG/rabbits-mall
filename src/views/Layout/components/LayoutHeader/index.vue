@@ -8,6 +8,7 @@
  * 组件依赖
  * **/
 import { useCategoryStore } from '@/stores/category/index.js'
+import HeaderCart from './HeaderCart/index.vue'
 
 /***
  * 脚本主体逻辑
@@ -38,6 +39,7 @@ const categoryStore = useCategoryStore()
         <input type="text" placeholder="搜一搜">
       </div>
       <!-- 头部购物车 -->
+      <HeaderCart></HeaderCart>
     </div>
   </header>
 </template>

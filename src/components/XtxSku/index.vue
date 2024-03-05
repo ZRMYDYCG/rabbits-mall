@@ -88,7 +88,6 @@ const updateDisabledStatus = (specs, pathMap) => {
   })
 }
 
-
 export default {
   name: 'XtxGoodSku',
   props: {
